@@ -1,0 +1,12 @@
+{
+  "objectId": 7,
+  "objectName": "Humidity sensor",
+  "objectType": "Sensor",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  },
+  "parentId": 2
+}

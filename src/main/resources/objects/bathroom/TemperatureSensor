@@ -1,0 +1,12 @@
+{
+  "objectId": 11,
+  "objectName": "Temperature sensor",
+  "objectType": "Sensor",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  },
+  "parentId": 4
+}

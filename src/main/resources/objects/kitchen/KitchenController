@@ -1,0 +1,20 @@
+{
+  "objectId": 3,
+  "objectName": "Kitchen controller",
+  "objectType": "Controller",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    },
+    "Mac address": {
+      "value": "12:94:bc:dd:9c:e1",
+      "type": "String"
+    },
+    "Firmware version": {
+      "value": "1.4b",
+      "type": "String"
+    }
+  },
+  "parentId": 1
+}

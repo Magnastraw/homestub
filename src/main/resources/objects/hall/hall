@@ -1,0 +1,20 @@
+{
+  "objectId": 5,
+  "objectName": "Hall controller",
+  "objectType": "Controller",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    },
+    "Mac address": {
+      "value": "7e:55:7d:33:63:06",
+      "type": "String"
+    },
+    "Firmware version": {
+      "value": "1.4b",
+      "type": "String"
+    }
+  },
+  "parentId": 1
+}

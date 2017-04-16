@@ -1,0 +1,12 @@
+{
+  "objectId": 15,
+  "objectName": "Electric panel",
+  "objectType": "Sensor",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  },
+  "parentId": 5
+}

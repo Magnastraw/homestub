@@ -1,0 +1,12 @@
+{
+  "objectId": 14,
+  "objectName": "Door Closure Sensor",
+  "objectType": "Sensor",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  },
+  "parentId": 5
+}

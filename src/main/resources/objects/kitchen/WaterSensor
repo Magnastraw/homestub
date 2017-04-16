@@ -1,0 +1,12 @@
+{
+  "objectId": 10,
+  "objectName": "Water monitoring sensor",
+  "objectType": "Sensor",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  },
+  "parentId": 3
+}
