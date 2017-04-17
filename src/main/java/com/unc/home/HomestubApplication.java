@@ -33,12 +33,7 @@ public class HomestubApplication {
 	}
 
 	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
-
-	@Bean
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+	public CommandLineRunner run() throws Exception {
 		return args -> {
 			home.init();
 
