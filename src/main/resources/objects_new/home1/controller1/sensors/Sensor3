@@ -1,0 +1,12 @@
+{
+  "objectName": "Door/Light sensor",
+  "objectType": "Sensor",
+  "supportMetrics": [],
+  "supportEvents": ["Open/close","On/off"],
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  }
+}

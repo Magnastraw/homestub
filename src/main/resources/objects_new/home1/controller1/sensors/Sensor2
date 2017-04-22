@@ -1,0 +1,12 @@
+{
+  "objectName": "MEGA sensor",
+  "objectType": "Sensor",
+  "supportMetrics": ["Humidity","Temperature"],
+  "supportEvents": "",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  }
+}

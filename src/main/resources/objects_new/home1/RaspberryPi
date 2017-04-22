@@ -1,7 +1,8 @@
 {
-  "objectId": 1,
   "objectName": "Smarthome controller",
-  "objectType": "RootController",
+  "objectType": "Controller",
+  "supportMetrics": [],
+  "supportEvents": [],
   "parameters": {
     "Active time": {
       "value": "1 day",
@@ -23,11 +24,5 @@
       "value": "Raspberry Pi Foundation",
       "type": "String"
     }
-  },
-  "parentId": 0
+  }
 }
-
-//связность метрик и объектов
-
-//каталоги контроллер-датчик (парент ид объектов в каталоге = ид объекта в каталоге выше,
-//в структуре тип метрик/евента, проходим по объектам генерим евенты/метрики по доступному типу)

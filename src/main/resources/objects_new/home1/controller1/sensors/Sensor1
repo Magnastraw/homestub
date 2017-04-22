@@ -1,0 +1,12 @@
+{
+  "objectName": "Humidity sensor",
+  "objectType": "Sensor",
+  "supportMetrics": ["Humidity"],
+  "supportEvents": "",
+  "parameters": {
+    "Active time": {
+      "value": "1 day",
+      "type": "Time"
+    }
+  }
+}

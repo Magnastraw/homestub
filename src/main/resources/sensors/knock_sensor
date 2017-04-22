@@ -1,0 +1,21 @@
+{
+  "objectName": "Knock module",
+  "objectType": "Sensor",
+  "objectDescription": "Knock module",
+  "supportMetrics": [],
+  "supportEvents": ["On/off"],
+  "parameters": {
+    "Manufacturer": {
+      "value": "Keyes",
+      "type": "String"
+    },
+    "Voltage": {
+      "value": "3~5V",
+      "type": "String"
+    },
+    "Operating Temperature:": {
+      "value": "-40C to 85C",
+      "type": "String"
+    }
+  }
+}

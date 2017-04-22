@@ -1,0 +1,21 @@
+{
+  "objectName": "Reed sensor module",
+  "objectType": "Sensor",
+  "objectDescription": "Reed sensor module",
+  "supportMetrics": [],
+  "supportEvents": ["On/off"],
+  "parameters": {
+    "Manufacturer": {
+      "value": "Chipskey",
+      "type": "String"
+    },
+    "Voltage": {
+      "value": "1.5V to 6V",
+      "type": "String"
+    },
+    "Operating Temperature:": {
+      "value": "-40C to 125C",
+      "type": "String"
+    }
+  }
+}

@@ -16,6 +16,7 @@ import java.util.List;
 public class ScheduledTasks {
     private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
     private static List<MetricValue> metricBuffer = new ArrayList<>();
+
     @Value("${house.id}")
     private String houseId;
 
