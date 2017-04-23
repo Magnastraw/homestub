@@ -1,0 +1,86 @@
+[
+  {
+    "objectId": 3,
+    "subobjectId": 4,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:28.912",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 3,
+    "subobjectId": 5,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:28.912",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 3,
+    "subobjectId": 6,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:28.912",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 10,
+    "subobjectId": 11,
+    "severity": "Open",
+    "registryDate": "2017-04-23T20:16:28.912",
+    "eventParameters": "Close"
+  },
+  {
+    "objectId": 10,
+    "subobjectId": 12,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:28.912",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 10,
+    "subobjectId": 14,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:28.912",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 3,
+    "subobjectId": 4,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:40.001",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 3,
+    "subobjectId": 5,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:40.001",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 3,
+    "subobjectId": 6,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:40.001",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 10,
+    "subobjectId": 11,
+    "severity": "Open",
+    "registryDate": "2017-04-23T20:16:40.001",
+    "eventParameters": "Close"
+  },
+  {
+    "objectId": 10,
+    "subobjectId": 12,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:40.001",
+    "eventParameters": "Off"
+  },
+  {
+    "objectId": 10,
+    "subobjectId": 14,
+    "severity": "On",
+    "registryDate": "2017-04-23T20:16:40.001",
+    "eventParameters": "Off"
+  }
+]

@@ -1,6 +1,8 @@
 package com.unc.home.generator;
 
 
-public interface Generator {
-    double generate();
+import com.unc.home.smarthome.inventory.InventoryObject;
+
+public interface Generator<T> {
+    T generate(InventoryObject object);
 }

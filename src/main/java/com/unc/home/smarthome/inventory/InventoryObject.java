@@ -1,35 +1,37 @@
 package com.unc.home.smarthome.inventory;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.unc.home.smarthome.AdditionalParameters;
 import com.unc.home.requests.RequestObject;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 
-public class InventoryObject implements Comparable<InventoryObject>,RequestObject {
+public class InventoryObject implements RequestObject {
+    @JsonIgnore
     private long objectId;
     private String objectName;
     private String objectType;
+    private String objectDescription;
+    private List<String> supportedMetrics;
+    private List<String> supportedEvents;
     private Map<String, AdditionalParameters> parameters;
+    @JsonIgnore
     private long parentId;
 
     public InventoryObject() {
     }
 
-    public InventoryObject(long objectId, String objectName, String objectType, Map<String, AdditionalParameters> parameters, long parentId) {
-        this.objectId = objectId;
-        this.objectName = objectName;
-        this.objectType = objectType;
-        this.parentId = parentId;
-        this.parameters = parameters;
-    }
-
+    @JsonProperty
     public long getObjectId() {
         return objectId;
     }
 
+    @JsonIgnore
     public void setObjectId(long objectId) {
         this.objectId = objectId;
     }
@@ -50,6 +52,14 @@ public class InventoryObject implements Comparable<InventoryObject>,RequestObjec
         this.objectType = objectType;
     }
 
+    public String getObjectDescription() {
+        return objectDescription;
+    }
+
+    public void setObjectDescription(String objectDescription) {
+        this.objectDescription = objectDescription;
+    }
+
     public Map<String, AdditionalParameters> getParameters() {
         return parameters;
     }
@@ -58,17 +68,38 @@ public class InventoryObject implements Comparable<InventoryObject>,RequestObjec
         this.parameters = parameters;
     }
 
+    @JsonProperty
     public long getParentId() {
         return parentId;
     }
 
+    @JsonIgnore
     public void setParentId(long parentId) {
         this.parentId = parentId;
     }
 
+    @JsonIgnore
+    public List<String> getSupportedMetrics() {
+        return supportedMetrics;
+    }
+
+    @JsonProperty
+    public void setSupportedMetrics(List<String> supportedMetrics) {
+        this.supportedMetrics = supportedMetrics;
+    }
+
+    @JsonIgnore
+    public List<String> getSupportedEvents() {
+        return supportedEvents;
+    }
+
+    @JsonProperty
+    public void setSupportedEvents(List<String> supportedEvents) {
+        this.supportedEvents = supportedEvents;
+    }
+
     @Override
     public boolean equals(Object o) {
-
         if (o == this) return true;
         if (!(o instanceof InventoryObject)) {
             return false;
@@ -82,9 +113,4 @@ public class InventoryObject implements Comparable<InventoryObject>,RequestObjec
         return Objects.hash(objectId);
     }
 
-    @Override
-    public int compareTo(InventoryObject o) {
-        return (objectId < o.objectId) ? -1 : (objectId > o.objectId) ? 1 : 0;
-
-    }
 }

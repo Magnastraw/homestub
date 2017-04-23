@@ -1,0 +1,25 @@
+{
+  "objectName": "Water Flow",
+  "objectType": "Sensor",
+  "objectDescription": "Water flow sensor",
+  "supportedMetrics": ["WaterFlow"],
+  "supportedEvents": [],
+  "parameters": {
+    "Manufacturer": {
+      "value": "BQLZR",
+      "type": "String"
+    },
+    "Operation voltage:": {
+      "value": "5 to 15V",
+      "type": "String"
+    },
+    "Accuracy": {
+      "value": "±10%",
+      "type": "String"
+    },
+    "Working range": {
+      "value": "1 to 30L min",
+      "type": "String"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "objectName": "NTC thermistor",
+  "objectType": "Sensor",
+  "objectDescription": "Analog temperature sensor",
+  "supportedMetrics": ["Temperature"],
+  "supportedEvents": [],
+  "parameters": {
+    "Temperature range": {
+      "value": "-55°C to +125°C",
+      "type": "String"
+    },
+    "Accuracy": {
+      "value": "±0.5°C",
+      "type": "String"
+    }
+  }
+}

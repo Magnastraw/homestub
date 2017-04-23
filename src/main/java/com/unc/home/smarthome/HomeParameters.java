@@ -15,7 +15,7 @@ public class HomeParameters implements RequestObject {
     public HomeParameters() {
     }
 
-    public HomeParameters(int homeId, Map<String, AdditionalParameters> parameters) {
+    public HomeParameters(long homeId, Map<String, AdditionalParameters> parameters) {
         this.homeId = homeId;
         this.parameters = parameters;
     }

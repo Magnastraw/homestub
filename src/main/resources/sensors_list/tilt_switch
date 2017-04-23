@@ -1,0 +1,22 @@
+{
+//  TODO:Voltage
+  "objectName": "Tilt sensor",
+  "objectType": "Sensor",
+  "objectDescription": "Tilt switch module 90 degrees/horizontal",
+  "supportedMetrics": [],
+  "supportedEvents": ["Open/close"],
+  "parameters": {
+    "Manufacturer": {
+      "value": "	Keyes",
+      "type": "String"
+    },
+    "Working voltag": {
+      "value": "3.3V to 5V",
+      "type": "String"
+    },
+    "Operating Temperature:": {
+      "value": "-40C to 85C",
+      "type": "String"
+    }
+  }
+}
