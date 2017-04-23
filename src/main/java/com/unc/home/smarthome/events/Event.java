@@ -1,7 +1,7 @@
 package com.unc.home.smarthome.events;
 
 
-import com.unc.home.generator.Generator;
+import com.unc.home.generators.Generator;
 import com.unc.home.smarthome.inventory.InventoryObject;
 
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public class Event {
             EventObject eventObject = new EventObject(
                     inventoryObject.getParentId(),
                     inventoryObject.getObjectId(),
-                    "1",
+                    "NORMAL",
                     LocalDateTime.now().toString(),
                     (String) generatorMap.get(eventType).generate(inventoryObject)
             );

@@ -1,4 +1,4 @@
-package com.unc.home.generator;
+package com.unc.home.generators;
 
 
 import com.unc.home.smarthome.inventory.InventoryObject;

@@ -61,8 +61,8 @@ public class DirectoryWatcher implements Runnable {
     DirectoryWatcher(Path dir, Inventory inventory, String houseId) throws IOException {
         this.watcher = FileSystems.getDefault().newWatchService();
         this.keys = new HashMap<WatchKey, Path>();
-        this.inventory=inventory;
-        this.dir=dir;
+        this.inventory = inventory;
+        this.dir = dir;
         this.houseId = houseId;
         System.out.format("Scanning %s ...\n", dir);
         registerAll(dir);
@@ -109,8 +109,8 @@ public class DirectoryWatcher implements Runnable {
                             //TODO:single object add and multithreading
                             inventory.setObjectId(1L);
                             inventory.setInventoryObjectList(new ArrayList<InventoryObject>());
-                            inventory.buildInventoryFromDirectory(this.dir.toFile(),0);
-                            HttpRequestManager.postRequestList(inventory.getInventoryObjectList(),"inventories",houseId);
+                            inventory.buildInventoryFromDirectory(this.dir.toFile(), 0);
+                            HttpRequestManager.postRequestList(inventory.getInventoryObjectList(), "inventories", houseId);
 
                         }
                     } catch (IOException x) {

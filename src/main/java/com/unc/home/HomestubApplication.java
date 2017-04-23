@@ -47,21 +47,6 @@ public class HomestubApplication {
 		return new SimpleAsyncTaskExecutor();
 	}
 
-//	@Bean
-//	public CommandLineRunner run() throws Exception {
-//		return args -> {
-//			ObjectMapper objectMapper = new ObjectMapper();
-//			Inventory inventory = new Inventory();
-//			inventory.getInventoryFromDirectory(new File("src/main/resources/objects_new/home1"),0);
-//
-//			System.out.println(objectMapper.writeValueAsString(inventory.getInventoryObjectList()));
-////			home.init();
-////
-////			HttpRequestManager.postRequestObject(home.getHomeParameters(),"house",houseId);
-////			HttpRequestManager.postRequestList(home.getInventoryObjects(),"inventories",houseId);
-//		};
-//	}
-
 	@Bean
 	public CommandLineRunner schedulingRunner(TaskExecutor executor) {
 		return args -> {

@@ -4,17 +4,19 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.unc.home.HomestubApplication;
-import com.unc.home.generator.Generator;
-import com.unc.home.generator.events.OnOffGenerator;
-import com.unc.home.generator.events.OpenCloseGenerator;
+import com.unc.home.generators.Generator;
+import com.unc.home.generators.events.OnOffGenerator;
+import com.unc.home.generators.events.OpenCloseGenerator;
 import com.unc.home.requests.HttpRequestManager;
-import com.unc.home.generator.metrics.HumidityGenerator;
-import com.unc.home.generator.metrics.TemperatureGenerator;
-import com.unc.home.generator.metrics.WaterGenerator;
+import com.unc.home.generators.metrics.HumidityGenerator;
+import com.unc.home.generators.metrics.TemperatureGenerator;
+import com.unc.home.generators.metrics.WaterGenerator;
 import com.unc.home.smarthome.events.Event;
 import com.unc.home.smarthome.inventory.Inventory;
 import com.unc.home.smarthome.metrics.Metric;
-import com.unc.home.smarthome.metrics.MetricObject;
+import com.unc.home.tasks.GetInventory;
+import com.unc.home.tasks.GetPolicy;
+import com.unc.home.tasks.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +42,12 @@ public class Home {
     private Event event;
     private ObjectMapper objectMapper;
     private Map<String, Generator> generatorMap;
+    private Map<String, Task> taskMap;
+    private List<HomeTask> homeTaskList;
 
     @Value("${house.id}")
     private String houseId;
-   // private long secretKey;
+    // private long secretKey;
 
     @Autowired
     Environment env;
@@ -55,9 +59,11 @@ public class Home {
     public void init() throws IOException {
         this.homeParameters = new HomeParameters();
         this.objectMapper = new ObjectMapper();
+        this.homeTaskList = new ArrayList<>();
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         this.inventory = new Inventory(objectMapper);
         this.generatorMap = new HashMap<>();
+        this.taskMap = new HashMap<>();
 
         generatorMap.put("Temperature", new TemperatureGenerator());
         generatorMap.put("Humidity", new HumidityGenerator());
@@ -65,15 +71,19 @@ public class Home {
         generatorMap.put("On/off", new OnOffGenerator());
         generatorMap.put("Open/close", new OpenCloseGenerator());
 
+        taskMap.put("GetPolicy", new GetPolicy(inventory, houseId));
+        taskMap.put("GetInventory", new GetInventory(inventory, houseId));
+
+
         try {
             getHomeParams(new File("src/main/resources/homes/home1/homeparams"));
-            inventory.buildInventoryFromDirectory(new File("src/main/resources/homes/home1/objects"),0);
+            inventory.buildInventoryFromDirectory(new File("src/main/resources/homes/home1/objects"), 0);
 
-            HttpRequestManager.postRequestObject(homeParameters,"house",houseId);
-            HttpRequestManager.postRequestList(inventory.getInventoryObjectList(),"inventories",houseId);
+            HttpRequestManager.postRequestObject(homeParameters, "house", houseId);
+            HttpRequestManager.postRequestList(inventory.getInventoryObjectList(), "inventories", houseId);
 
-            this.metric = new Metric(inventory.getInventoryObjectList(),env,generatorMap);
-            this.event = new Event(inventory.getInventoryObjectList(),generatorMap);
+            this.metric = new Metric(inventory.getInventoryObjectList(), env, generatorMap);
+            this.event = new Event(inventory.getInventoryObjectList(), generatorMap);
         } catch (NullPointerException ex) {
             LOG.error("File missing", ex);
         }
@@ -129,18 +139,21 @@ public class Home {
 
     @Scheduled(cron = "${cron.hometasks}")
     public void getTasks() {
-        HttpRequestManager.getRequest("house",houseId);
+        homeTaskList = HttpRequestManager.getHomeTasks("house", houseId);
+        for (HomeTask homeTask : homeTaskList) {
+            taskMap.get(homeTask.getAction()).action(homeTask.getParameters());
+        }
     }
 
     @Scheduled(cron = "${cron.event}")
-    public void generateEvents(){
-        HttpRequestManager.postRequestList( event.generateEvents(),"event",houseId);
+    public void generateEvents() {
+        HttpRequestManager.postRequestList(event.generateEvents(), "event", houseId);
         event.getEventObjectList().clear();
     }
 
     @Scheduled(cron = "${cron.metric}")
-    public void generateMetric(){
-        HttpRequestManager.postRequestList( metric.generateMetrics(),"metrics",houseId);
+    public void generateMetric() {
+        HttpRequestManager.postRequestList(metric.generateMetrics(), "metrics", houseId);
         metric.getMetricObjectList().clear();
     }
 }

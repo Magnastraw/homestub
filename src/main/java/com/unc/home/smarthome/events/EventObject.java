@@ -9,6 +9,7 @@ public class EventObject implements RequestObject {
     private long objectId;
     private long subobjectId;
     private String severity;
+    //TODO:fix time (error when serialize into db entity)
     private String registryDate;
     private String eventParameters;
 

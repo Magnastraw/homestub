@@ -1,7 +1,6 @@
-package com.unc.home.generator.metrics;
+package com.unc.home.generators.metrics;
 
-import com.unc.home.generator.Generator;
-import com.unc.home.requests.RequestObject;
+import com.unc.home.generators.Generator;
 import com.unc.home.smarthome.inventory.InventoryObject;
 import org.apache.commons.math3.util.Precision;
 

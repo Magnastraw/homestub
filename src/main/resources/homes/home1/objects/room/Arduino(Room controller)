@@ -1,5 +1,5 @@
 {
-  "objectName": "Room controller1",
+  "objectName": "Room controller",
   "objectType": "Controller",
   "objectDescription": "Arduino room controller",
   "supportedMetrics": [],

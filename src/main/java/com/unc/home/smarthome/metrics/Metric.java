@@ -1,7 +1,7 @@
 package com.unc.home.smarthome.metrics;
 
 
-import com.unc.home.generator.Generator;
+import com.unc.home.generators.Generator;
 import com.unc.home.smarthome.inventory.InventoryObject;
 import org.springframework.core.env.Environment;
 
