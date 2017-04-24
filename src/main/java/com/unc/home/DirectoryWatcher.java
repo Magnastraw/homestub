@@ -22,8 +22,6 @@ public class DirectoryWatcher implements Runnable {
     private final Map<WatchKey, Path> keys;
     private Inventory inventory;
     private boolean trace = false;
-    private Path dir;
-    private String houseId;
 
     @SuppressWarnings("unchecked")
     static <T> WatchEvent<T> cast(WatchEvent<?> event) {
@@ -58,12 +56,10 @@ public class DirectoryWatcher implements Runnable {
         });
     }
 
-    DirectoryWatcher(Path dir, Inventory inventory, String houseId) throws IOException {
+    DirectoryWatcher(Path dir, Inventory inventory) throws IOException {
         this.watcher = FileSystems.getDefault().newWatchService();
         this.keys = new HashMap<WatchKey, Path>();
         this.inventory = inventory;
-        this.dir = dir;
-        this.houseId = houseId;
         System.out.format("Scanning %s ...\n", dir);
         registerAll(dir);
         System.out.println("Done.");
@@ -106,15 +102,20 @@ public class DirectoryWatcher implements Runnable {
                         if (Files.isDirectory(child, NOFOLLOW_LINKS)) {
                             registerAll(child);
                         } else {
-                            //TODO:single object add and multithreading
-                            inventory.setObjectId(1L);
-                            inventory.setInventoryObjectList(new ArrayList<InventoryObject>());
-                            inventory.buildInventoryFromDirectory(this.dir.toFile(), 0);
-                            HttpRequestManager.postRequestList(inventory.getInventoryObjectList(), "inventories", houseId);
-
+                            inventory.addNewInventoryObject(Paths.get(dir + "/..").toRealPath(), child);
                         }
                     } catch (IOException x) {
-                        // ignore to keep sample readbale
+                        LOG.error("Errow during create", x);
+                    }
+                } else if (kind == ENTRY_DELETE) {
+                    try {
+                        if (Files.isDirectory(child, NOFOLLOW_LINKS)) {
+                            registerAll(child);
+                        } else {
+                            inventory.deleteObject(child);
+                        }
+                    } catch (IOException x) {
+                        LOG.error("Errow during delete", x);
                     }
                 }
             }

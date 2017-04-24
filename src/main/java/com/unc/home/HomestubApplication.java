@@ -22,8 +22,6 @@ import java.util.Scanner;
 public class HomestubApplication {
 	private final Home home;
 
-
-
 	@Autowired
 	public HomestubApplication(Home home) {
 		this.home = home;
@@ -31,14 +29,7 @@ public class HomestubApplication {
 
 	public static void main(String[] args) {
 
-		Scanner scanner = new Scanner(System.in);
 
-		System.out.print("Enter your key: ");
-
-
-		String key = scanner.next();
-		scanner.close();
-		System.out.println(key);
 		SpringApplication.run(HomestubApplication.class);
 	}
 
@@ -50,7 +41,7 @@ public class HomestubApplication {
 	@Bean
 	public CommandLineRunner schedulingRunner(TaskExecutor executor) {
 		return args -> {
-			executor.execute(new DirectoryWatcher(Paths.get(new File("src/main/resources/homes/home1/objects").getAbsolutePath()),home.getInventory(),home.getHouseId()));
+			executor.execute(new DirectoryWatcher(Paths.get(new File("src/main/resources/homes/home1/objects").getAbsolutePath()),home.getInventory()));
 		};
 
 	}

@@ -18,7 +18,6 @@ public class GetPolicy implements Task<String> {
 
     @Override
     public String action(Map<String, AdditionalParameters> parameters) {
-
         return null;
     }
 }

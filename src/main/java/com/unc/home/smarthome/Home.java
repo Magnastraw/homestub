@@ -10,7 +10,7 @@ import com.unc.home.generators.events.OpenCloseGenerator;
 import com.unc.home.requests.HttpRequestManager;
 import com.unc.home.generators.metrics.HumidityGenerator;
 import com.unc.home.generators.metrics.TemperatureGenerator;
-import com.unc.home.generators.metrics.WaterGenerator;
+import com.unc.home.generators.metrics.WaterFlowGenerator;
 import com.unc.home.smarthome.events.Event;
 import com.unc.home.smarthome.inventory.Inventory;
 import com.unc.home.smarthome.metrics.Metric;
@@ -44,10 +44,10 @@ public class Home {
     private Map<String, Generator> generatorMap;
     private Map<String, Task> taskMap;
     private List<HomeTask> homeTaskList;
+    private String secretKey;
 
     @Value("${house.id}")
     private String houseId;
-    // private long secretKey;
 
     @Autowired
     Environment env;
@@ -67,7 +67,7 @@ public class Home {
 
         generatorMap.put("Temperature", new TemperatureGenerator());
         generatorMap.put("Humidity", new HumidityGenerator());
-        generatorMap.put("WaterFlow", new WaterGenerator());
+        generatorMap.put("WaterFlow", new WaterFlowGenerator());
         generatorMap.put("On/off", new OnOffGenerator());
         generatorMap.put("Open/close", new OpenCloseGenerator());
 
@@ -78,6 +78,12 @@ public class Home {
         try {
             getHomeParams(new File("src/main/resources/homes/home1/homeparams"));
             inventory.buildInventoryFromDirectory(new File("src/main/resources/homes/home1/objects"), 0);
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Enter your key: ");
+            secretKey=scanner.next();
+            scanner.close();
+            homeParameters.getParameters().put("SecretKey",new AdditionalParameters(secretKey,"String"));
 
             HttpRequestManager.postRequestObject(homeParameters, "house", houseId);
             HttpRequestManager.postRequestList(inventory.getInventoryObjectList(), "inventories", houseId);
@@ -135,6 +141,14 @@ public class Home {
 
     public void setHouseId(String houseId) {
         this.houseId = houseId;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     @Scheduled(cron = "${cron.hometasks}")

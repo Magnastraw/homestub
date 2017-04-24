@@ -5,6 +5,8 @@ import com.unc.home.generators.Generator;
 import com.unc.home.smarthome.inventory.InventoryObject;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,8 @@ public class Event {
     private List<EventObject> eventObjectList;
     private List<InventoryObject> inventoryObjectList;
     private Map<String, Generator> generatorMap;
+    private DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
 
     public Event(List<InventoryObject> inventoryObjectList, Map<String, Generator> generatorMap) {
         this.eventObjectList = new ArrayList<>();
@@ -28,7 +32,7 @@ public class Event {
                     inventoryObject.getParentId(),
                     inventoryObject.getObjectId(),
                     "NORMAL",
-                    LocalDateTime.now().toString(),
+                    ZonedDateTime.now().format(FORMATTER),
                     (String) generatorMap.get(eventType).generate(inventoryObject)
             );
             eventObjectList.add(eventObject);

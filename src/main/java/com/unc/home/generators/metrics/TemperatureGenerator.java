@@ -1,6 +1,7 @@
 package com.unc.home.generators.metrics;
 
 
+import com.unc.home.Utils;
 import com.unc.home.generators.Generator;
 import com.unc.home.smarthome.inventory.InventoryObject;
 import org.apache.commons.math3.util.Precision;
@@ -13,6 +14,10 @@ public class TemperatureGenerator implements Generator<Double> {
 
     @Override
     public Double generate(InventoryObject object) {
-        return Precision.round(ThreadLocalRandom.current().nextDouble(MIN_TEMPERATURE, MAX_TEMPERATURE),2);
+        if (!Utils.isAlarm) {
+            return Precision.round(ThreadLocalRandom.current().nextDouble(MIN_TEMPERATURE, MAX_TEMPERATURE), 2);
+        } else {
+            return Precision.round(ThreadLocalRandom.current().nextDouble(MIN_TEMPERATURE, MAX_TEMPERATURE), 2);
+        }
     }
 }

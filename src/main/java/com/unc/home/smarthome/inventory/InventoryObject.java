@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.unc.home.smarthome.AdditionalParameters;
 import com.unc.home.requests.RequestObject;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -22,6 +23,8 @@ public class InventoryObject implements RequestObject {
     private Map<String, AdditionalParameters> parameters;
     @JsonIgnore
     private long parentId;
+    @JsonIgnore
+    private Path dir;
 
     public InventoryObject() {
     }
@@ -96,6 +99,14 @@ public class InventoryObject implements RequestObject {
     @JsonProperty
     public void setSupportedEvents(List<String> supportedEvents) {
         this.supportedEvents = supportedEvents;
+    }
+
+    public Path getDir() {
+        return dir;
+    }
+
+    public void setDir(Path dir) {
+        this.dir = dir;
     }
 
     @Override
