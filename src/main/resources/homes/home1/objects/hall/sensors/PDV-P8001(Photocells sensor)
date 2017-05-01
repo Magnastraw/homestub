@@ -1,0 +1,21 @@
+{
+  "objectName": "PDV-P8001",
+  "objectType": "Sensor",
+  "objectDescription": "Photocells sensor",
+  "supportedMetrics": ["Power"],
+  "supportedEvents": [],
+  "parameters": {
+    "Manufacturer": {
+      "value": "Luna Optoelectronics ",
+      "type": "String"
+    },
+    "Max applied voltage": {
+      "value": "150 V",
+      "type": "String"
+    },
+    "Operating Temperature:": {
+      "value": "-30°C to 75°C ",
+      "type": "String"
+    }
+  }
+}

@@ -7,6 +7,7 @@ import com.unc.home.HomestubApplication;
 import com.unc.home.generators.Generator;
 import com.unc.home.generators.events.OnOffGenerator;
 import com.unc.home.generators.events.OpenCloseGenerator;
+import com.unc.home.generators.metrics.PowerGenerator;
 import com.unc.home.requests.HttpRequestManager;
 import com.unc.home.generators.metrics.HumidityGenerator;
 import com.unc.home.generators.metrics.TemperatureGenerator;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -44,9 +46,6 @@ public class Home {
     private Map<String, Generator> generatorMap;
     private Map<String, Task> taskMap;
     private List<HomeTask> homeTaskList;
-    private String secretKey;
-
-    @Value("${house.id}")
     private String houseId;
 
     @Autowired
@@ -61,32 +60,40 @@ public class Home {
         this.objectMapper = new ObjectMapper();
         this.homeTaskList = new ArrayList<>();
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        this.inventory = new Inventory(objectMapper);
         this.generatorMap = new HashMap<>();
+
         this.taskMap = new HashMap<>();
 
-        generatorMap.put("Temperature", new TemperatureGenerator());
-        generatorMap.put("Humidity", new HumidityGenerator());
-        generatorMap.put("WaterFlow", new WaterFlowGenerator());
+        generatorMap.put("Temperature", new TemperatureGenerator(env));
+        generatorMap.put("Humidity", new HumidityGenerator(env));
+        generatorMap.put("WaterFlow", new WaterFlowGenerator(env));
+        generatorMap.put("Power", new PowerGenerator(env));
         generatorMap.put("On/off", new OnOffGenerator());
         generatorMap.put("Open/close", new OpenCloseGenerator());
 
-        taskMap.put("GetPolicy", new GetPolicy(inventory, houseId));
-        taskMap.put("GetInventory", new GetInventory(inventory, houseId));
-
 
         try {
-            getHomeParams(new File("src/main/resources/homes/home1/homeparams"));
-            inventory.buildInventoryFromDirectory(new File("src/main/resources/homes/home1/objects"), 0);
             Scanner scanner = new Scanner(System.in);
 
             System.out.print("Enter your key: ");
-            secretKey=scanner.next();
+            houseId = scanner.next();
             scanner.close();
-            homeParameters.getParameters().put("SecretKey",new AdditionalParameters(secretKey,"String"));
+
+            this.inventory = new Inventory(objectMapper, houseId);
+
+            getHomeParams(new File("src/main/resources/homes/home1/homeparams"));
+            inventory.buildInventoryFromDirectory(new File("src/main/resources/homes/home1/objects"), 0);
+
+            taskMap.put("GetPolicy", new GetPolicy(inventory, houseId));
+            taskMap.put("GetInventory", new GetInventory(inventory, houseId));
+            homeParameters.getParameters().put("SecretKey", new AdditionalParameters(houseId, "String"));
 
             HttpRequestManager.postRequestObject(homeParameters, "house", houseId);
             HttpRequestManager.postRequestList(inventory.getInventoryObjectList(), "inventories", houseId);
+
+//            for (HomeTask homeTask : homeTaskList) {
+//                taskMap.get(homeTask.getAction()).action(homeTask.getParameters());
+//            }
 
             this.metric = new Metric(inventory.getInventoryObjectList(), env, generatorMap);
             this.event = new Event(inventory.getInventoryObjectList(), generatorMap);
@@ -135,39 +142,28 @@ public class Home {
         this.metric = metric;
     }
 
-    public String getHouseId() {
-        return houseId;
-    }
-
-    public void setHouseId(String houseId) {
-        this.houseId = houseId;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
     @Scheduled(cron = "${cron.hometasks}")
     public void getTasks() {
+
         homeTaskList = HttpRequestManager.getHomeTasks("house", houseId);
-        for (HomeTask homeTask : homeTaskList) {
-            taskMap.get(homeTask.getAction()).action(homeTask.getParameters());
+        if (homeTaskList != null) {
+            for (HomeTask homeTask : homeTaskList) {
+                taskMap.get(homeTask.getAction()).action(homeTask.getParameters());
+            }
+        } else {
+            LOG.info("No tasks");
         }
     }
 
     @Scheduled(cron = "${cron.event}")
     public void generateEvents() {
-        HttpRequestManager.postRequestList(event.generateEvents(), "event", houseId);
-        event.getEventObjectList().clear();
+        if (HttpRequestManager.postRequestList(event.generateEvents(), "event", houseId) == HttpStatus.OK)
+            event.getEventObjectList().clear();
     }
 
     @Scheduled(cron = "${cron.metric}")
     public void generateMetric() {
-        HttpRequestManager.postRequestList(metric.generateMetrics(), "metrics", houseId);
-        metric.getMetricObjectList().clear();
+        if (HttpRequestManager.postRequestList(metric.generateMetrics(), "metrics", houseId) == HttpStatus.OK)
+            metric.getMetricObjectList().clear();
     }
 }

@@ -15,7 +15,7 @@ public class EventObject implements RequestObject {
     public EventObject() {
     }
 
-    public EventObject(long objectId, long subobjectId, String severity, String registryDate, String eventParameters) {
+    public EventObject(long objectId, long subobjectId,String registryDate, String eventParameters, String severity) {
         this.objectId = objectId;
         this.subobjectId = subobjectId;
         this.severity = severity;

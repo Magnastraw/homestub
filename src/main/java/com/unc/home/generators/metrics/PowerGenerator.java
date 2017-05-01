@@ -12,19 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class WaterFlowGenerator implements Generator<Double> {
+public class PowerGenerator implements Generator<Double>{
     private Map<RequestObject, Double> valueMap = new HashMap<>();
     private Environment environment;
 
-    public WaterFlowGenerator(Environment environment) {
-        this.environment = environment;
+    public PowerGenerator(Environment environment) {
+        this.environment=environment;
     }
 
     @Override
     public Double generate(InventoryObject object) {
         if (!Utils.isAlarm) {
-            Double value = Precision.round(ThreadLocalRandom.current().nextDouble(Double.valueOf(environment.getProperty("normal.MIN_WATER_AMOUNT")),
-                    Double.valueOf(environment.getProperty("normal.MAX_WATER_AMOUNT"))), 2);
+            Double value = Precision.round(ThreadLocalRandom.current().nextDouble(Double.valueOf(environment.getProperty("normal.MIN_POWER")),
+                    Double.valueOf(environment.getProperty("normal.MAX_POWER"))), 2);
             if (!valueMap.containsKey(object)) {
                 valueMap.put(object, value);
             } else {
@@ -35,6 +35,5 @@ public class WaterFlowGenerator implements Generator<Double> {
             return valueMap.get(object);
 
         }
-
     }
 }

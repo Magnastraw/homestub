@@ -8,7 +8,7 @@ import com.unc.home.smarthome.inventory.InventoryObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OpenCloseGenerator implements Generator<String> {
+public class OpenCloseGenerator implements Generator<String>{
     private Map<RequestObject, String> valueMap = new HashMap<>();
 
     @Override
@@ -20,4 +20,5 @@ public class OpenCloseGenerator implements Generator<String> {
         }
         return valueMap.get(object);
     }
+
 }

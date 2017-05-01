@@ -16,13 +16,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Inventory {
     private long objectId=1;
+    private String houseId;
     private List<InventoryObject> inventoryObjectList;
     private ObjectMapper objectMapper;
     private static final Logger LOG = LoggerFactory.getLogger(HomestubApplication.class);
 
 
-    public Inventory(ObjectMapper objectMapper) {
+    public Inventory(ObjectMapper objectMapper,String houseId) {
         this.inventoryObjectList = new CopyOnWriteArrayList<>();
+        this.houseId = houseId;
         this.objectMapper = objectMapper;
     }
 
@@ -60,7 +62,7 @@ public class Inventory {
                 List<InventoryObject> tempInventoryList = new ArrayList<>();
                 tempInventoryList.add(newInventoryObject);
 
-                HttpRequestManager.postRequestList(tempInventoryList, "inventories", "1");
+                HttpRequestManager.postRequestList(tempInventoryList, "inventories", houseId);
             }
         }
     }
@@ -68,7 +70,7 @@ public class Inventory {
     public void deleteObject(Path objDir){
         for(InventoryObject inventoryObject:inventoryObjectList) {
             if (inventoryObject.getDir().toAbsolutePath().equals(objDir)) {
-                HttpRequestManager.deleteObject("inventories", "1",String.valueOf(inventoryObject.getObjectId()));
+                HttpRequestManager.deleteObject("inventories", houseId,String.valueOf(inventoryObject.getObjectId()));
             }
         }
     }

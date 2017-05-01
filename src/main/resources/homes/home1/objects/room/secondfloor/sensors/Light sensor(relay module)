@@ -1,16 +1,16 @@
 {
-  "objectName": "Tilt sensor",
+  "objectName": "Relay Module",
   "objectType": "Sensor",
-  "objectDescription": "Tilt switch module 90 degrees/horizontal",
+  "objectDescription": "Relay module",
   "supportedMetrics": [],
-  "supportedEvents": ["Open/close"],
+  "supportedEvents": ["On/off"],
   "parameters": {
     "Manufacturer": {
-      "value": "	Keyes",
+      "value": "Wonderwing",
       "type": "String"
     },
-    "Working voltag": {
-      "value": "3.3V to 5V",
+    "Voltage": {
+      "value": "5V",
       "type": "String"
     },
     "Operating Temperature:": {

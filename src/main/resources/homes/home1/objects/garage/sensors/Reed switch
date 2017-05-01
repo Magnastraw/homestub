@@ -1,20 +1,20 @@
 {
-  "objectName": "Tilt sensor",
+  "objectName": "Reed sensor module",
   "objectType": "Sensor",
-  "objectDescription": "Tilt switch module 90 degrees/horizontal",
+  "objectDescription": "Reed sensor module",
   "supportedMetrics": [],
   "supportedEvents": ["Open/close"],
   "parameters": {
     "Manufacturer": {
-      "value": "	Keyes",
+      "value": "Chipskey",
       "type": "String"
     },
-    "Working voltag": {
-      "value": "3.3V to 5V",
+    "Voltage": {
+      "value": "1.5V to 6V",
       "type": "String"
     },
     "Operating Temperature:": {
-      "value": "-40C to 85C",
+      "value": "-40C to 125C",
       "type": "String"
     }
   }

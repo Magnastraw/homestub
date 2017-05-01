@@ -6,6 +6,7 @@ import com.unc.home.smarthome.inventory.InventoryObject;
 import org.springframework.core.env.Environment;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,8 +19,6 @@ public class Metric {
     private Environment environment;
     private Map<String, Generator> generatorMap;
     private DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-
-
 
     public Metric(List<InventoryObject> inventoryObjectList, Environment environment, Map<String, Generator> generatorMap) {
         this.metricObjectList = new ArrayList<>();
@@ -36,7 +35,7 @@ public class Metric {
                             inventoryObject.getParentId(),
                             inventoryObject.getObjectId(),
                             (Double) generatorMap.get(metricType).generate(inventoryObject),
-                            ZonedDateTime.now().format(FORMATTER),
+                            ZonedDateTime.now(ZoneOffset.UTC).format(FORMATTER),
                             Long.valueOf(environment.getProperty("metric." + metricType))
                     );
                     metricObjectList.add(metricObject);

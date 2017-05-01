@@ -1,16 +1,16 @@
 {
-  "objectName": "Kitchen controller",
+  "objectName": "Garage controller",
   "objectType": "Controller",
-  "objectDescription": "Arduino kitchen controller",
+  "objectDescription": "Arduino garage controller",
   "supportedMetrics": [],
   "supportedEvents": [],
   "parameters": {
     "Mac address": {
-      "value": "6f:b5:e7:32:db:60",
+      "value": "9b:8b:28:6c:12:20",
       "type": "String"
     },
     "Firmware version": {
-      "value": "1.4.5b",
+      "value": "1.7b",
       "type": "String"
     }
   }

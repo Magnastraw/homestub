@@ -28,12 +28,13 @@ public class Event {
     public List<EventObject> generateEvents() {
         InventoryObject inventoryObject = getRandomObject();
         for (String eventType : inventoryObject.getSupportedEvents()) {
+            String event = (String)generatorMap.get(eventType).generate(inventoryObject);
             EventObject eventObject = new EventObject(
                     inventoryObject.getParentId(),
                     inventoryObject.getObjectId(),
-                    "NORMAL",
                     ZonedDateTime.now().format(FORMATTER),
-                    (String) generatorMap.get(eventType).generate(inventoryObject)
+                    event,
+                    getSeverity(event)
             );
             eventObjectList.add(eventObject);
         }
@@ -51,9 +52,25 @@ public class Event {
     }
 
 
+    private String getSeverity(String event){
+        switch (event){
+            case "On":
+                return "WARN";
+            case "Off":
+                return "NORMAL";
+            case "Open":
+                return "WARN";
+            case "Close":
+                return "NORMAL";
+            default:
+                return "CLEAR";
+        }
+    }
+
     public List<EventObject> getEventObjectList() {
         return eventObjectList;
     }
+
     public void setEventObjectList(List<EventObject> eventObjectList) {
         this.eventObjectList = eventObjectList;
     }

@@ -20,4 +20,5 @@ public class OnOffGenerator implements Generator<String> {
         }
         return valueMap.get(object);
     }
+
 }

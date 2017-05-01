@@ -18,7 +18,7 @@ public class GetInventory implements Task<String> {
 
     @Override
     public String action(Map<String, AdditionalParameters> parameters) {
-        HttpRequestManager.putRequestList(inventory.getInventoryObjectList(),"inventories",houseId);
+        HttpRequestManager.postRequestList(inventory.getInventoryObjectList(), "inventories", houseId);
         return null;
     }
 }

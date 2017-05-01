@@ -6,7 +6,7 @@
   "supportedEvents": [],
   "parameters": {
     "Mac address": {
-      "value": "7b:6f:bb:dc:ad:14",
+      "value": "4c:61:0d:1c:09:44",
       "type": "String"
     },
     "Firmware version": {
