@@ -86,7 +86,7 @@ public class Home {
 
             taskMap.put("GetPolicy", new GetPolicy(inventory, houseId));
             taskMap.put("GetInventory", new GetInventory(inventory, houseId));
-            homeParameters.getParameters().put("SecretKey", new AdditionalParameters(houseId, "String"));
+            homeParameters.getParameters().put("Secret Key", new AdditionalParameters(houseId, "String"));
 
             homeTaskList=HttpRequestManager.postRequestHome(homeParameters, "house", houseId);
             if (homeTaskList != null) {

@@ -1,6 +1,6 @@
 {
   "objectName": "Smarthome controller",
-  "objectType": "Controller",
+  "objectType": "RootController",
   "objectDescription": "Root home controller",
   "supportedMetrics": [],
   "supportedEvents": [],
