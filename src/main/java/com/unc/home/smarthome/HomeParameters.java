@@ -8,23 +8,23 @@ import java.util.Map;
 
 public class HomeParameters implements RequestObject {
     @JsonIgnore
-    private long homeId;
+    private String homeId;
 
     private Map<String,AdditionalParameters> parameters;
 
     public HomeParameters() {
     }
 
-    public HomeParameters(long homeId, Map<String, AdditionalParameters> parameters) {
+    public HomeParameters(String homeId, Map<String, AdditionalParameters> parameters) {
         this.homeId = homeId;
         this.parameters = parameters;
     }
 
-    public long getHomeId() {
+    public String getHomeId() {
         return homeId;
     }
 
-    public void setHomeId(long homeId) {
+    public void setHomeId(String homeId) {
         this.homeId = homeId;
     }
 

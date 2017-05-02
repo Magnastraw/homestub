@@ -88,12 +88,14 @@ public class Home {
             taskMap.put("GetInventory", new GetInventory(inventory, houseId));
             homeParameters.getParameters().put("SecretKey", new AdditionalParameters(houseId, "String"));
 
-            HttpRequestManager.postRequestObject(homeParameters, "house", houseId);
-            HttpRequestManager.postRequestList(inventory.getInventoryObjectList(), "inventories", houseId);
-
-//            for (HomeTask homeTask : homeTaskList) {
-//                taskMap.get(homeTask.getAction()).action(homeTask.getParameters());
-//            }
+            homeTaskList=HttpRequestManager.postRequestHome(homeParameters, "house", houseId);
+            if (homeTaskList != null) {
+                for (HomeTask homeTask : homeTaskList) {
+                    taskMap.get(homeTask.getAction()).action(homeTask.getParameters());
+                }
+            } else {
+                LOG.info("No tasks");
+            }
 
             this.metric = new Metric(inventory.getInventoryObjectList(), env, generatorMap);
             this.event = new Event(inventory.getInventoryObjectList(), generatorMap);
@@ -110,7 +112,7 @@ public class Home {
                 } else {
                     JavaType javaType = objectMapper.getTypeFactory().constructParametricType(Map.class, String.class, AdditionalParameters.class);
                     Map<String, AdditionalParameters> map = objectMapper.readValue(fileEntry, javaType);
-                    homeParameters = new HomeParameters(Long.valueOf(houseId), map);
+                    homeParameters = new HomeParameters(houseId, map);
                 }
             }
         } catch (NullPointerException ex) {
@@ -144,7 +146,6 @@ public class Home {
 
     @Scheduled(cron = "${cron.hometasks}")
     public void getTasks() {
-
         homeTaskList = HttpRequestManager.getHomeTasks("house", houseId);
         if (homeTaskList != null) {
             for (HomeTask homeTask : homeTaskList) {
