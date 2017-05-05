@@ -1,0 +1,6 @@
+{
+  "homeName": {
+    "value": "My smarthome",
+    "type": "String"
+  }
+}

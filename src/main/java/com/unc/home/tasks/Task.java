@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 
-public interface Task<T> {
-    T action(Map<String,AdditionalParameters> parameters);
+public interface Task {
+    void action(Map<String, AdditionalParameters> parameters);
 }

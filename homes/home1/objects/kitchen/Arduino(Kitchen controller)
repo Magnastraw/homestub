@@ -1,0 +1,17 @@
+{
+  "objectName": "Kitchen controller",
+  "objectType": "Controller",
+  "objectDescription": "Arduino kitchen controller",
+  "supportedMetrics": [],
+  "supportedEvents": [],
+  "parameters": {
+    "Mac address": {
+      "value": "6f:b5:e7:32:db:60",
+      "type": "String"
+    },
+    "Firmware version": {
+      "value": "1.4.5b",
+      "type": "String"
+    }
+  }
+}

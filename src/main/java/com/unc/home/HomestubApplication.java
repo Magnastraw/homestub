@@ -15,7 +15,12 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.ServletContext;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -25,6 +30,7 @@ import java.util.Scanner;
 @PropertySource("classpath:stub.properties")
 public class HomestubApplication {
 	private final Home home;
+	private static String key;
 
 	@Autowired
 	public HomestubApplication(Home home) {
@@ -56,7 +62,7 @@ public class HomestubApplication {
 	@Bean
 	public CommandLineRunner schedulingRunner(TaskExecutor executor) {
 		return args -> {
-			executor.execute(new DirectoryWatcher(Paths.get(new File("src/main/resources/homes/home1/objects").getAbsolutePath()),home.getInventory()));
+			executor.execute(new DirectoryWatcher(Paths.get(System.getProperty("user.dir")+"/homes/home1/objects"),home.getInventory()));
 		};
 
 	}

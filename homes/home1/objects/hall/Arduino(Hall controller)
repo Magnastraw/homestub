@@ -1,0 +1,17 @@
+{
+  "objectName": "Hall controller",
+  "objectType": "Controller",
+  "objectDescription": "Arduino hall controller ",
+  "supportedMetrics": [],
+  "supportedEvents": [],
+  "parameters": {
+    "Mac address": {
+      "value": "19:99:69:63:6a:69",
+      "type": "String"
+    },
+    "Firmware version": {
+      "value": "1.2b",
+      "type": "String"
+    }
+  }
+}

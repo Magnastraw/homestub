@@ -1,0 +1,25 @@
+{
+  "objectName": "Smarthome controller",
+  "objectType": "RootController",
+  "objectDescription": "Root home controller",
+  "supportedMetrics": [],
+  "supportedEvents": [],
+  "parameters": {
+    "Mac address": {
+      "value": "eb:2b:70:fd:4f:ad",
+      "type": "String"
+    },
+    "Operation system": {
+      "value": "Ubuntu 14.04",
+      "type": "String"
+    },
+    "Web-site": {
+      "value": "https://www.raspberrypi.org/",
+      "type": "Link"
+    },
+    "Manufacturer": {
+      "value": "Raspberry Pi Foundation",
+      "type": "String"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "objectName": "Room controller",
+  "objectType": "Controller",
+  "objectDescription": "Arduino room controller",
+  "supportedMetrics": [],
+  "supportedEvents": [],
+  "parameters": {
+    "Mac address": {
+      "value": "4c:61:0d:1c:09:44",
+      "type": "String"
+    },
+    "Firmware version": {
+      "value": "1.4b",
+      "type": "String"
+    }
+  }
+}

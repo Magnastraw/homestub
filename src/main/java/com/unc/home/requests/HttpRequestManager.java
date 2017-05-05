@@ -5,6 +5,7 @@ import com.unc.home.HomestubApplication;
 import com.unc.home.Utils;
 import com.unc.home.smarthome.HomeParameters;
 import com.unc.home.smarthome.HomeTask;
+import com.unc.home.smarthome.policy.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -82,6 +83,17 @@ public class HttpRequestManager {
             return response.getBody();
         } catch (HttpClientErrorException ex) {
             throw new HttpClientErrorException(ex.getStatusCode(), "Error during post request home");
+        }
+    }
+
+    public static List<Rule> getRules(String endpoint, String houseId){
+        try {
+            ResponseEntity<List<Rule>> response = restTemplate
+                    .exchange(Utils.uriTemplate(endpoint, houseId), HttpMethod.GET, HttpEntity.EMPTY, new ParameterizedTypeReference<List<Rule>>() {
+                    });
+            return response.getBody();
+        } catch (HttpClientErrorException ex) {
+            throw new HttpClientErrorException(ex.getStatusCode(), "Error during get rules");
         }
     }
 }

@@ -1,0 +1,17 @@
+{
+  "objectName": "Garage controller",
+  "objectType": "Controller",
+  "objectDescription": "Arduino garage controller",
+  "supportedMetrics": [],
+  "supportedEvents": [],
+  "parameters": {
+    "Mac address": {
+      "value": "9b:8b:28:6c:12:20",
+      "type": "String"
+    },
+    "Firmware version": {
+      "value": "1.7b",
+      "type": "String"
+    }
+  }
+}

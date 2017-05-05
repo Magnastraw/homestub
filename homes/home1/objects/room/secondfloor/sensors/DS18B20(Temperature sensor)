@@ -1,0 +1,25 @@
+{
+  "objectName": "DS18B20",
+  "objectType": "Sensor",
+  "objectDescription": "Digital temperature sensor",
+  "supportedMetrics": ["Temperature"],
+  "supportedEvents": [],
+  "parameters": {
+    "Manufacturer": {
+      "value": "Maxim IC",
+      "type": "String"
+    },
+    "Power supply range": {
+      "value": "3.0V to 5.5V",
+      "type": "String"
+    },
+    "Temperature range": {
+      "value": "-55 ° C to +125 ℃",
+      "type": "String"
+    },
+    "Accuracy": {
+      "value": "±0.5°C from –10°C to +85°C",
+      "type": "String"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "objectName": "Bathroom controller",
+  "objectType": "Controller",
+  "objectDescription": "Arduino bathroom controller ",
+  "supportedMetrics": [],
+  "supportedEvents": [],
+  "parameters": {
+    "Mac address": {
+      "value": "e0:54:b8:fa:6e:a0",
+      "type": "String"
+    },
+    "Firmware version": {
+      "value": "1.4b",
+      "type": "String"
+    }
+  }
+}

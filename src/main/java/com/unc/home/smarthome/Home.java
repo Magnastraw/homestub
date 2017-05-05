@@ -15,6 +15,7 @@ import com.unc.home.generators.metrics.WaterFlowGenerator;
 import com.unc.home.smarthome.events.Event;
 import com.unc.home.smarthome.inventory.Inventory;
 import com.unc.home.smarthome.metrics.Metric;
+import com.unc.home.smarthome.policy.Rule;
 import com.unc.home.tasks.GetInventory;
 import com.unc.home.tasks.GetPolicy;
 import com.unc.home.tasks.Task;
@@ -46,13 +47,12 @@ public class Home {
     private Map<String, Generator> generatorMap;
     private Map<String, Task> taskMap;
     private List<HomeTask> homeTaskList;
+    private List<Rule> ruleList;
     private String houseId;
 
     @Autowired
     Environment env;
 
-    public Home() {
-    }
 
     @PostConstruct
     public void init() throws IOException {
@@ -71,24 +71,27 @@ public class Home {
         generatorMap.put("On/off", new OnOffGenerator());
         generatorMap.put("Open/close", new OpenCloseGenerator());
 
-
-        try {
+        if (env.containsProperty("key")) {
+            houseId = env.getProperty("key");
+        } else if (env.containsProperty("house.key")) {
+            houseId = env.getProperty("house.key");
+        } else {
             Scanner scanner = new Scanner(System.in);
-
             System.out.print("Enter your key: ");
             houseId = scanner.next();
             scanner.close();
-
+        }
+        try {
             this.inventory = new Inventory(objectMapper, houseId);
 
-            getHomeParams(new File("src/main/resources/homes/home1/homeparams"));
-            inventory.buildInventoryFromDirectory(new File("src/main/resources/homes/home1/objects"), 0);
+            getHomeParams(new File(System.getProperty("user.dir") + "/homes/home1/homeparams"));
+            inventory.buildInventoryFromDirectory(new File(System.getProperty("user.dir") + "/homes/home1/objects"), 0);
 
-            taskMap.put("GetPolicy", new GetPolicy(inventory, houseId));
+            taskMap.put("GetPolicy", new GetPolicy(ruleList, houseId));
             taskMap.put("GetInventory", new GetInventory(inventory, houseId));
             homeParameters.getParameters().put("Secret Key", new AdditionalParameters(houseId, "String"));
 
-            homeTaskList=HttpRequestManager.postRequestHome(homeParameters, "house", houseId);
+            homeTaskList = HttpRequestManager.postRequestHome(homeParameters, "house", houseId);
             if (homeTaskList != null) {
                 for (HomeTask homeTask : homeTaskList) {
                     taskMap.get(homeTask.getAction()).action(homeTask.getParameters());
