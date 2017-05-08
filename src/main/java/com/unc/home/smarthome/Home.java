@@ -101,7 +101,7 @@ public class Home {
             }
 
             this.metric = new Metric(inventory.getInventoryObjectList(), env, generatorMap);
-            this.event = new Event(inventory.getInventoryObjectList(), generatorMap);
+            this.event = new Event(inventory.getInventoryObjectList(), env, generatorMap);
         } catch (NullPointerException ex) {
             LOG.error("File missing", ex);
         }
