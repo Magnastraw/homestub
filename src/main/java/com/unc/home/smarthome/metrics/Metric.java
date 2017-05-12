@@ -35,7 +35,7 @@ public class Metric {
                             inventoryObject.getParentId(),
                             inventoryObject.getObjectId(),
                             (Double) generatorMap.get(metricType).generate(inventoryObject),
-                            ZonedDateTime.now(ZoneOffset.UTC).format(FORMATTER),
+                            ZonedDateTime.now().format(FORMATTER),
                             Long.valueOf(environment.getProperty("metric." + metricType))
                     );
                     metricObjectList.add(metricObject);

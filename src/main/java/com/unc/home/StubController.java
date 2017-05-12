@@ -12,7 +12,7 @@ public class StubController {
 
     @RequestMapping("/")
     public String critMode() {
-        Utils.isAlarm=true;
+        Utils.isAlarm= !Utils.isAlarm;
         return HttpStatus.OK.toString();
     }
 }

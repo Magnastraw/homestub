@@ -21,8 +21,8 @@ public class HumidityGenerator implements Generator<Double> {
             return Precision.round(ThreadLocalRandom.current().nextDouble(Double.valueOf(environment.getProperty("normal.MIN_HUMIDITY")),
                     Double.valueOf(environment.getProperty("normal.MAX_HUMIDITY"))), 2);
         } else {
-            return Precision.round(ThreadLocalRandom.current().nextDouble(Double.valueOf(environment.getProperty("normal.MIN_HUMIDITY")),
-                    Double.valueOf(environment.getProperty("normal.MAX_HUMIDITY"))), 2);
+            return Precision.round(ThreadLocalRandom.current().nextDouble(Double.valueOf(environment.getProperty("critical.MIN_HUMIDITY")),
+                    Double.valueOf(environment.getProperty("critical.MAX_HUMIDITY"))), 2);
         }
     }
 }
