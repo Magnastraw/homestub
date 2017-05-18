@@ -1,0 +1,21 @@
+{
+  "objectName": "IP 212-141",
+  "objectType": "Sensor",
+  "objectDescription": "Smoke detector",
+  "supportedMetrics": [],
+  "supportedEvents": ["On/Off"],
+  "parameters": {
+    "Manufacturer": {
+      "value": "RUBEZH",
+      "type": "String"
+    },
+    "Power supply range": {
+      "value": "9.0V to 30.0V",
+      "type": "String"
+    },
+    "Temperature range": {
+      "value": "-45 ° C to +55 ℃",
+      "type": "String"
+    }
+  }
+}

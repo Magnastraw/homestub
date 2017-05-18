@@ -22,7 +22,6 @@ public class WaterFlowGenerator implements Generator<Double> {
 
     @Override
     public Double generate(InventoryObject object) {
-        if (!Utils.isAlarm) {
             Double value = Precision.round(ThreadLocalRandom.current().nextDouble(Double.valueOf(environment.getProperty("normal.MIN_WATER_AMOUNT")),
                     Double.valueOf(environment.getProperty("normal.MAX_WATER_AMOUNT"))), 2);
             if (!valueMap.containsKey(object)) {
@@ -31,10 +30,5 @@ public class WaterFlowGenerator implements Generator<Double> {
                 valueMap.put(object, valueMap.get(object) + value);
             }
             return valueMap.get(object);
-        } else {
-            return valueMap.get(object);
-
-        }
-
     }
 }
